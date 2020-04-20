@@ -13,9 +13,14 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {   
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(-1f, 0f, rotZ);
+        float cSpeed = animator.GetFloat("Speed");
+
+        if(cSpeed < 0.01f && cSpeed > 0f)
+        {
+            Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(-1f, 0f, rotZ);
+        }
 
         if(Input.GetButtonDown("Fire1") && bulletCount > 0)
         {   
