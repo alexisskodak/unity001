@@ -8,8 +8,6 @@ public class Weapon : MonoBehaviour
     public Transform FirePoint;
     public Transform BulletPrefab;
     public Animator animator;
-    //private float timeBtwShots;
-    //public float startTimeBtwShots;
 
     void Update()
     {   
