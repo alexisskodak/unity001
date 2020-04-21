@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
-{   
+{ 
     public int bulletCount;
     public Transform FirePoint;
     public Transform BulletPrefab;
@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {   
         Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
         bulletCount -= 1;

@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     public float health = 100;
     public GameObject deathEffect;
     public HealthBar healthBar;
-
     public void TakeDamage(float damage)
     {
         health -= damage;
