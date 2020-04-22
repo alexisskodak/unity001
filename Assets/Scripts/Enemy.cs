@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
         healthBar.SetSize(health/100);
         if(health <= 0)
             Die();
+            
+        if(health < 30)
+            healthBar.SetColor(Color.red);
     }
 
     void Die()
