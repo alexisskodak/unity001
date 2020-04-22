@@ -1,13 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Weapon : MonoBehaviour
-{ 
-    public int bulletCount;
+{
     public Transform FirePoint;
     public Transform BulletPrefab;
     public Animator animator;
+    public float damage;
+
+    int bulletCount;
+    int totalBullets = 20;
+
+    void Start()
+    {
+        SetBulletAmount();
+    }
 
     void Update()
     {   
@@ -31,5 +40,15 @@ public class Weapon : MonoBehaviour
     {   
         Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
         bulletCount -= 1;
+    }
+
+    public void SetBulletAmount()
+    {
+        bulletCount = totalBullets;
+    }
+
+    public string DisplayBulletCounter()
+    {
+        return bulletCount.ToString() + "/" + totalBullets.ToString();
     }
 }
