@@ -7,10 +7,14 @@ public class Bullet : MonoBehaviour
     public float speed;
     public Rigidbody2D rb;
     public GameObject impactEffect;
-    public float damageToDeal;
+    float damageToDeal;
+    public Weapon dWeapon;
+    
     void Start()
     {
         rb.velocity = transform.right * speed;
+        dWeapon = GameObject.Find("FirePoint").GetComponent<Weapon>();
+        damageToDeal = dWeapon.damage;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
