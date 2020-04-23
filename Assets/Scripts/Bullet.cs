@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed;
     public Rigidbody2D rb;
     public GameObject impactEffect;
-    float damageToDeal;
     public Weapon dWeapon;
+
+    float bSpeed;
+    float damageToDeal;
     
     void Start()
-    {
-        rb.velocity = transform.right * speed;
+    {   
         dWeapon = GameObject.Find("FirePoint").GetComponent<Weapon>();
         damageToDeal = dWeapon.damage;
+        bSpeed = dWeapon.bulletSpeed;
+        rb.velocity = transform.right * bSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)

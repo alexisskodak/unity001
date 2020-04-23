@@ -9,23 +9,30 @@ public class Weapon : MonoBehaviour
     public Transform BulletPrefab;
     public Animator animator;
     public float damage;
+    public float bulletSpeed;
 
     int bulletCount;
-    int totalBullets = 20;
+    int totalBullets;
 
     void Start()
-    {
-        SetBulletAmount();
+    {   
+        SetBulletAmount(50);
     }
 
     void Update()
+    {   
+        Shoot();
+    }
+
+    public void Shoot()
     {   
         if(Input.GetButtonDown("Fire1") && bulletCount > 0)
         {   
             bool shootMode = animator.GetBool("ShootMode");
             if (shootMode == true)
             {
-                Shoot();
+                Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
+                bulletCount -= 1;
                 animator.SetBool("IsShooting", true);
             }
         }
@@ -36,18 +43,13 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void Shoot()
+    public void SetBulletAmount(int cBullets)
     {   
-        Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
-        bulletCount -= 1;
-    }
-
-    public void SetBulletAmount()
-    {
+        totalBullets = cBullets;
         bulletCount = totalBullets;
     }
 
-    public string DisplayBulletCounter()
+    public string PrintAmmo()
     {
         return bulletCount.ToString() + "/" + totalBullets.ToString();
     }
