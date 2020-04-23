@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     int clipSize;
     int totalAmmo;
 
-    void Start()
+    void Awake()
     {   
         SetBulletAmount(50);
         SetClipSize(20);
@@ -74,7 +74,7 @@ public class Weapon : MonoBehaviour
 
     public void SetDamage(float sDamage)
     {
-        sDamage = damage;
+        damage = sDamage;
     }
 
     public float GetBulletVelocity()
