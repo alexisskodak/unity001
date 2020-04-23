@@ -1,24 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using TMPro;
 
 public class UIAmmoDisplay : MonoBehaviour
 {
     public Weapon cWeapon;
-    public TextMesh ammoDisplay;
+    public TextMeshProUGUI aText;
 
-    string ammo;
-    
     void Start()
     {
         cWeapon = GameObject.Find("FirePoint").GetComponent<Weapon>();
-        
-
+        aText.text = "text";
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        ammoDisplay.text = cWeapon.DisplayBulletCounter();
+        aText.text = cWeapon.PrintAmmo();
     }
 }
