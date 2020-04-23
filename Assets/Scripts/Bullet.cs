@@ -14,8 +14,8 @@ public class Bullet : MonoBehaviour
     void Start()
     {   
         dWeapon = GameObject.Find("FirePoint").GetComponent<Weapon>();
-        damageToDeal = dWeapon.damage;
-        bSpeed = dWeapon.bulletSpeed;
+        damageToDeal = dWeapon.GetDamage();
+        bSpeed = dWeapon.GetBulletVelocity();
         rb.velocity = transform.right * bSpeed;
     }
 

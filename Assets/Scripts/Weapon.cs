@@ -8,15 +8,19 @@ public class Weapon : MonoBehaviour
     public Transform FirePoint;
     public Transform BulletPrefab;
     public Animator animator;
-    public float damage;
-    public float bulletSpeed;
 
+    float damage;
+    float bulletSpeed;
     int bulletCount;
-    int totalBullets;
+    int clipSize;
+    int totalAmmo;
 
     void Start()
     {   
         SetBulletAmount(50);
+        SetClipSize(20);
+        SetDamage(20);
+        SetBulletVelocity(25);
     }
 
     void Update()
@@ -45,12 +49,42 @@ public class Weapon : MonoBehaviour
 
     public void SetBulletAmount(int cBullets)
     {   
-        totalBullets = cBullets;
-        bulletCount = totalBullets;
+        totalAmmo = cBullets;
+        bulletCount = totalAmmo;
+    }
+
+    public void SetClipSize(int cSize)
+    {
+        clipSize = cSize;
     }
 
     public string PrintAmmo()
     {
-        return bulletCount.ToString() + "/" + totalBullets.ToString();
+        return bulletCount.ToString() + "/" + clipSize.ToString();
+    }
+
+    public string PrintTotalAmmo()
+    {
+        return totalAmmo.ToString();
+    }
+
+    public float GetDamage()
+    {
+        return damage;
+    }
+
+    public void SetDamage(float sDamage)
+    {
+        sDamage = damage;
+    }
+
+    public float GetBulletVelocity()
+    {
+        return bulletSpeed;
+    }
+
+    public void SetBulletVelocity(float bSpeed)
+    {
+        bulletSpeed = bSpeed;
     }
 }
