@@ -15,6 +15,6 @@ public class UIAmmoDisplay : MonoBehaviour
 
     void FixedUpdate()
     {
-        aText.text = cWeapon.PrintAmmo() + " " + cWeapon.PrintTotalAmmo();
+        aText.text = cWeapon.PrintAmmo() + "    " + cWeapon.PrintTotalAmmo();
     }
 }
