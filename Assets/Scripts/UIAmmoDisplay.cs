@@ -11,11 +11,10 @@ public class UIAmmoDisplay : MonoBehaviour
     void Start()
     {
         cWeapon = GameObject.Find("FirePoint").GetComponent<Weapon>();
-        aText.text = "text";
     }
 
     void FixedUpdate()
     {
-        aText.text = cWeapon.PrintAmmo();
+        aText.text = cWeapon.PrintAmmo() + " " + cWeapon.PrintTotalAmmo();
     }
 }

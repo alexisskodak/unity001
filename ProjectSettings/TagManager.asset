@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - AmmoText
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,7 @@ TagManager:
     locked: 0
   - name: Foreground elements
     uniqueID: 2593584703
+    locked: 0
+  - name: UI
+    uniqueID: 2478338857
     locked: 0
