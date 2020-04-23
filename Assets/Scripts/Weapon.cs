@@ -16,10 +16,7 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {   
-        SetBulletAmount(50);
-        SetClipSize(20);
-        SetDamage(20);
-        SetBulletVelocity(25);
+        SetWeapon(18, 72, 10, 25);
     }
 
     void Update()
@@ -46,17 +43,6 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void SetBulletAmount(int cBullets)
-    {   
-        totalAmmo = cBullets;
-        bulletCount = totalAmmo;
-    }
-
-    public void SetClipSize(int cSize)
-    {
-        clipSize = cSize;
-    }
-
     public string PrintAmmo()
     {
         return bulletCount.ToString() + "/" + clipSize.ToString();
@@ -72,18 +58,18 @@ public class Weapon : MonoBehaviour
         return damage;
     }
 
-    public void SetDamage(float sDamage)
-    {
-        damage = sDamage;
-    }
-
     public float GetBulletVelocity()
     {
         return bulletSpeed;
     }
 
-    public void SetBulletVelocity(float bSpeed)
+    public void SetWeapon(int cSize, int tBullets, float wDamage, float bSpeed)
     {
+        clipSize = cSize;
+        totalAmmo = tBullets;
+        damage = wDamage;
         bulletSpeed = bSpeed;
+
+        bulletCount = clipSize;
     }
 }
