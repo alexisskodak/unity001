@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     public Transform BulletPrefab;
     public Animator animator;
 
+    bool isReloading;
+    float reloadTime;
     float damage;
     float bulletSpeed;
     int bulletCount;
@@ -16,7 +18,7 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {   
-        SetWeapon(18, 72, 10, 25);
+        SetWeapon(18, 36, 10, 25, .5f);
     }
 
     void Update()
@@ -26,7 +28,7 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {   
-        if(Input.GetButtonDown("Fire1") && bulletCount > 0)
+        if(Input.GetButtonDown("Fire1") && bulletCount > 0 && !isReloading)
         {   
             bool shootMode = animator.GetBool("ShootMode");
             if (shootMode == true)
@@ -41,6 +43,47 @@ public class Weapon : MonoBehaviour
         {
             animator.SetBool("IsShooting", false);
         }
+
+        if(Input.GetButtonDown("Reload") && bulletCount < clipSize && totalAmmo > 0)
+        {
+            StartCoroutine(Reload());
+        }
+
+        if(bulletCount == 0 && totalAmmo > 0)
+        {
+            StartCoroutine(Reload());
+        }
+    }
+
+    IEnumerator Reload()
+    {   
+        int bulletsToReload = clipSize - bulletCount;
+
+        isReloading = true;
+        animator.SetBool("isReloading", true);
+
+        yield return new WaitForSeconds(reloadTime);
+
+        if(bulletsToReload < totalAmmo)
+        {
+            bulletCount = clipSize;
+            totalAmmo -= bulletsToReload;
+        }
+
+        else if(bulletsToReload == totalAmmo)
+        {
+            bulletCount = clipSize;
+            totalAmmo -= clipSize;
+        }
+
+        else
+        {
+            bulletCount += totalAmmo;
+            totalAmmo -= totalAmmo;
+        }
+
+        isReloading = false;
+        animator.SetBool("isReloading", false);
     }
 
     public string PrintAmmo()
@@ -63,12 +106,13 @@ public class Weapon : MonoBehaviour
         return bulletSpeed;
     }
 
-    public void SetWeapon(int cSize, int tBullets, float wDamage, float bSpeed)
+    public void SetWeapon(int cSize, int tBullets, float wDamage, float bSpeed, float rTime)
     {
         clipSize = cSize;
         totalAmmo = tBullets;
         damage = wDamage;
         bulletSpeed = bSpeed;
+        reloadTime = rTime;
 
         bulletCount = clipSize;
     }
