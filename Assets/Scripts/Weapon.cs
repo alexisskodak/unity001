@@ -58,24 +58,20 @@ public class Weapon : MonoBehaviour
     IEnumerator Reload()
     {   
         int bulletsToReload = clipSize - bulletCount;
+        Debug.Log(bulletsToReload.ToString());
 
         isReloading = true;
         animator.SetBool("isReloading", true);
 
         yield return new WaitForSeconds(reloadTime);
 
-        if(bulletsToReload < totalAmmo)
-        {
-            bulletCount = clipSize;
-            totalAmmo -= bulletsToReload;
-        }
+        Debug.Log(bulletsToReload.ToString());
 
-        else if(bulletsToReload == totalAmmo)
+        if(bulletsToReload <= totalAmmo) // si hay suficientes balas para un cargador completo
         {
-            bulletCount = clipSize;
-            totalAmmo -= clipSize;
+            bulletCount += bulletsToReload; // balas en el cargador se vuelven a llenar
+            totalAmmo -= bulletsToReload; // 
         }
-
         else
         {
             bulletCount += totalAmmo;

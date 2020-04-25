@@ -8,10 +8,7 @@ public class g18 : MonoBehaviour
 
     private void Start() 
     {   
-        glock18.SetBulletAmount(36);
-        glock18.SetClipSize(18);
-        glock18.SetDamage(10);
-        glock18.SetBulletVelocity(10);
+        glock18.SetWeapon(18, 72, 25, 50, .3f);
     }
 
     private void Update()
