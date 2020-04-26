@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Weapon : MonoBehaviour
 {
     public Transform FirePoint;
     public Transform BulletPrefab;
     public Animator animator;
+    public TextMeshProUGUI ammoText;
 
     bool isReloading;
     float reloadTime;
@@ -32,6 +34,11 @@ public class Weapon : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
+    }
+
+    void FixedUpdate()
+    {
+        PrintToGUI();
     }
 
     public void Shoot()
@@ -77,6 +84,12 @@ public class Weapon : MonoBehaviour
     public string PrintTotalAmmo()
     {
         return totalAmmo.ToString();
+    }
+
+    public void PrintToGUI()
+    {
+        ammoText = GameObject.Find("Ammo_Display").GetComponent<TextMeshProUGUI>();
+        ammoText.text = PrintAmmo() + "    " + PrintTotalAmmo();
     }
 
     public float GetDamage()
