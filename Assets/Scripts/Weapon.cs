@@ -59,10 +59,10 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(reloadTime);
 
-        if (bulletsToReload <= totalAmmo && bulletCount <= clipSize) // si hay suficientes balas para un cargador completo
+        if (bulletsToReload <= totalAmmo && bulletCount <= clipSize)
         {
-            bulletCount += bulletsToReload; // balas en el cargador se vuelven a llenar
-            totalAmmo -= bulletsToReload; // 
+            bulletCount += bulletsToReload;
+            totalAmmo -= bulletsToReload;
         }
         else
         {
