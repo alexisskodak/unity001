@@ -17,19 +17,19 @@ public class Weapon : MonoBehaviour
     int totalAmmo;
 
     void Awake()
-    {   
+    {
         SetWeapon(18, 36, 10, 25, .5f);
     }
 
     void Update()
-    {   
+    {
         Shoot();
     }
 
     public void Shoot()
-    {   
-        if(Input.GetButtonDown("Fire1") && bulletCount > 0 && !isReloading)
-        {   
+    {
+        if (Input.GetButtonDown("Fire1") && bulletCount > 0 && !isReloading)
+        {
             bool shootMode = animator.GetBool("ShootMode");
             if (shootMode == true)
             {
@@ -39,35 +39,27 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1"))
         {
             animator.SetBool("IsShooting", false);
         }
 
-        if(Input.GetButtonDown("Reload") && bulletCount < clipSize && totalAmmo > 0)
-        {
-            StartCoroutine(Reload());
-        }
-
-        if(bulletCount == 0 && totalAmmo > 0)
+        if (!isReloading && (Input.GetButtonDown("Reload") && bulletCount < clipSize && totalAmmo > 0 || bulletCount == 0 && totalAmmo > 0))
         {
             StartCoroutine(Reload());
         }
     }
 
     IEnumerator Reload()
-    {   
+    {
         int bulletsToReload = clipSize - bulletCount;
-        Debug.Log(bulletsToReload.ToString());
-
+        
         isReloading = true;
         animator.SetBool("isReloading", true);
 
         yield return new WaitForSeconds(reloadTime);
 
-        Debug.Log(bulletsToReload.ToString());
-
-        if(bulletsToReload <= totalAmmo) // si hay suficientes balas para un cargador completo
+        if (bulletsToReload <= totalAmmo && bulletCount <= clipSize) // si hay suficientes balas para un cargador completo
         {
             bulletCount += bulletsToReload; // balas en el cargador se vuelven a llenar
             totalAmmo -= bulletsToReload; // 
