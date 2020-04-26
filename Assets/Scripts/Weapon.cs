@@ -22,26 +22,10 @@ public class Weapon : MonoBehaviour
     }
 
     void Update()
-    {
-        Shoot();
-    }
-
-    public void Shoot()
-    {
+    {   
         if (Input.GetButtonDown("Fire1") && bulletCount > 0 && !isReloading)
         {
-            bool shootMode = animator.GetBool("ShootMode");
-            if (shootMode == true)
-            {
-                Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
-                bulletCount -= 1;
-                animator.SetBool("IsShooting", true);
-            }
-        }
-
-        if (Input.GetButtonUp("Fire1"))
-        {
-            animator.SetBool("IsShooting", false);
+            Shoot();
         }
 
         if (!isReloading && (Input.GetButtonDown("Reload") && bulletCount < clipSize && totalAmmo > 0 || bulletCount == 0 && totalAmmo > 0))
@@ -50,10 +34,21 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public void Shoot()
+    {
+        bool shootMode = animator.GetBool("ShootMode");
+        if (shootMode == true)
+        {
+            Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
+            bulletCount -= 1;
+            animator.SetBool("IsShooting", true);
+        }
+    }
+
     IEnumerator Reload()
     {
         int bulletsToReload = clipSize - bulletCount;
-        
+
         isReloading = true;
         animator.SetBool("isReloading", true);
 
