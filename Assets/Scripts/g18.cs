@@ -8,7 +8,7 @@ public class g18 : MonoBehaviour
 
     private void Start() 
     {   
-        glock18.SetWeapon(18, 72, 25, 50, .3f);
+        glock18.SetWeapon(18, 72, 25, 50, .3f, true, 50);
     }
 
     private void Update()

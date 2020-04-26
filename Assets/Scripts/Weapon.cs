@@ -10,17 +10,19 @@ public class Weapon : MonoBehaviour
     public Animator animator;
     public TextMeshProUGUI ammoText;
 
+    bool isAutomatic;
     bool isReloading;
     float reloadTime;
     float damage;
     float bulletSpeed;
+    float fireRate;
     int bulletCount;
     int clipSize;
     int totalAmmo;
 
     void Awake()
     {
-        SetWeapon(18, 36, 10, 25, .5f);
+        SetWeapon(20, 80, 50, 50, 0.7f, false, 30f);
     }
 
     void Update()
@@ -102,14 +104,68 @@ public class Weapon : MonoBehaviour
         return bulletSpeed;
     }
 
-    public void SetWeapon(int cSize, int tBullets, float wDamage, float bSpeed, float rTime)
-    {
-        clipSize = cSize;
-        totalAmmo = tBullets;
-        damage = wDamage;
-        bulletSpeed = bSpeed;
-        reloadTime = rTime;
+    public void SetWeapon(int cSize, int tBullets, float wDamage, 
+                          float bSpeed, float rTime, bool aFire, float fRate)
+    {   
+        SetClipSize(cSize);
+        SetTotalAmmo(tBullets);
+        SetWeaponDamage(wDamage);
+        SetBulletVelocity(bSpeed);
+        SetReloadTime(rTime);
+        SetAutoFire(aFire);
+        SetFireRate(fRate);
+    }
 
-        bulletCount = clipSize;
+    public void SetClipSize(int cSize)
+    {
+        if(cSize > 0)
+            clipSize = cSize;
+        else
+            clipSize = 7;
+    }
+
+    public void SetTotalAmmo(int tBullets)
+    {
+        if(tBullets > 0)
+            totalAmmo = tBullets;
+        else
+            totalAmmo = 14;
+    }
+
+    public void SetWeaponDamage(float wDamage)
+    {
+        if(wDamage > 0)
+            damage = wDamage;
+        else
+            damage = 5;
+    }
+
+    public void SetBulletVelocity(float bSpeed)
+    {
+        if(bSpeed > 0)
+            bulletSpeed = bSpeed;
+        else
+            bulletSpeed = 10;
+    }
+
+    public void SetReloadTime(float rTime)
+    {
+        if(rTime > 0)
+            reloadTime = rTime;
+        else
+            reloadTime = 0.5f;
+    }
+
+    public void SetAutoFire(bool aFire)
+    {
+        isAutomatic = aFire;
+    }
+
+    public void SetFireRate(float fRate)
+    {
+        if(fRate > 0)
+            fireRate = fRate;
+        else
+            fireRate = 30;
     }
 }
