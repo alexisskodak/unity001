@@ -19,7 +19,7 @@ public class Weapon : MonoBehaviour
     int bulletCount;
     int clipSize;
     int totalAmmo;
-
+    
     void Awake()
     {
         SetWeapon(20, 80, 50, 50, 0.7f, false, 30f);

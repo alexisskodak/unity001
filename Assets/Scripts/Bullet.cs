@@ -7,9 +7,9 @@ public class Bullet : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject impactEffect;
 
-    private Weapon dWeapon;
-    private float bSpeed;
-    private float damageToDeal;
+    Weapon dWeapon;
+    float bSpeed;
+    float damageToDeal;
     
     void Start()
     {   
