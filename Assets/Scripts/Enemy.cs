@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {   
         rb2d = GetComponent<Rigidbody2D>();
+        SetAgroRange(10f);
+        SetMovementSpeed(5f);
         SetHealth(100f);
     }
 
@@ -27,6 +29,15 @@ public class Enemy : MonoBehaviour
     {
         // distance to player
         float distToPlayer = Vector2.Distance(transform.position, player.position);
+
+        if(distToPlayer < GetAgroRange())
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            StopChasePlayer();
+        }
     }
     
     public void TakeDamage(float damage)
@@ -40,6 +51,28 @@ public class Enemy : MonoBehaviour
             healthBar.SetColor(Color.red);
     }
 
+    public void ChasePlayer()
+    {   
+        animator.SetBool("isEngaging", true);
+        if(transform.position.x < player.position.x)
+        {
+            rb2d.velocity = new Vector2(moveSpeed, 0);
+            transform.localScale = new Vector2(1, 1);
+        }
+
+        else
+        {
+            rb2d.velocity = new Vector2(-moveSpeed, 0);
+            transform.localScale = new Vector2(-1, 1);
+        }
+    }
+
+    public void StopChasePlayer()
+    {
+        animator.SetBool("isEngaging", false);
+        rb2d.velocity = new Vector2(0, 0);
+    }
+
     public void SetHealth(float hp)
     {   
         if(hp >= 0f)
@@ -51,9 +84,9 @@ public class Enemy : MonoBehaviour
     public void SetAgroRange(float aRange)
     {   
         if(aRange >= 0f)
-            aRange = agroRange;
+            agroRange = aRange;
         else
-            aRange = 5f;
+            agroRange = 5f;
     }
 
     public void SetMovementSpeed(float mSpeed)
